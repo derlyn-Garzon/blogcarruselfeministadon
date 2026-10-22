@@ -42,5 +42,16 @@
         "categoria": "Interseccionalidad",
         "tiempo_lectura": "8 min",
         "autor": "Dra. Esperanza Morales"
+    },
+    {
+        "id": 5,
+        "titulo": "Feminismos decoloniales e Interseccionalidad",
+        "fecha_creacion": "2026-04-20",
+        "url_video": "https://escuelafeminista.org/videos/interseccionalidad-y-decolonialidad",
+        "url_imagen": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80",
+        "descripcion_corta": "Un análisis sobre las múltiples dimensiones de la opresión y el pensamiento crítico desde el sur global.",
+        "categoria": "Interseccionalidad",
+        "tiempo_lectura": "8 min",
+        "autor": "Dra. Esperanza Morales"
     }
 ]
