@@ -65,10 +65,16 @@
         <a href="#nosotros" class="hover:text-pink-600 transition-colors flex items-center gap-2">
           <i class="fa-solid fa-users text-rose-400"></i> Comunidad
         </a>
+        <button onclick="openDonationModal()" class="text-purple-700 hover:text-purple-900 font-semibold transition-colors flex items-center gap-1.5 bg-purple-100/80 px-3.5 py-1.5 rounded-full hover:bg-purple-200 shadow-sm text-sm">
+          <i class="fa-solid fa-heart text-pink-500"></i> Donar
+        </button>
       </nav>
 
       <!-- Action Button -->
       <div class="flex items-center gap-3">
+        <button onclick="openDonationModal()" class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold px-4 py-2.5 rounded-full shadow-lg shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm">
+          <i class="fa-solid fa-hand-holding-heart text-amber-300"></i> <span>Apoya a la Escuela</span>
+        </button>
         <button id="btn-nueva-reflexion" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-sm shadow-md shadow-pink-500/25 hover:shadow-lg hover:shadow-pink-500/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
           <i class="fa-solid fa-plus text-xs"></i> <span>Unirse</span>
         </button>
@@ -96,6 +102,14 @@
         <p class="mt-6 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
           Explora nuestros módulos interactivos, recursos en video y lecturas diseñadas para promover la empatía, el aprendizaje liberador y las redes de apoyo comunitario.
         </p>
+
+        <!-- Main Body Donation Button -->
+        <div class="mt-8 flex justify-center">
+          <button onclick="openDonationModal()" class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-500 hover:from-purple-700 hover:via-fuchsia-700 hover:to-pink-600 text-white font-bold px-7 py-3.5 rounded-full shadow-xl shadow-purple-500/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 flex items-center gap-3 text-base border-2 border-pink-200/50 group">
+            <i class="fa-solid fa-heart text-pink-200 group-hover:scale-125 transition-transform duration-300"></i>
+            <span>💖 Apoya a la Escuela</span>
+          </button>
+        </div>
 
         <!-- Quick Stats Badge Bar -->
         <div class="mt-8 flex flex-wrap justify-center items-center gap-6 text-slate-600 text-sm font-medium">
@@ -232,6 +246,44 @@
     </section>
 
   </main>
+
+  <!-- Interactive Modal for Nequi Donations -->
+  <div id="donationModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4 transition-opacity duration-300">
+    <div id="donationCard" class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl border-2 border-purple-100 text-center relative transform transition-transform duration-300 scale-95 opacity-0">
+      <!-- Close Button -->
+      <button onclick="closeDonationModal()" aria-label="Cerrar modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold w-8 h-8 rounded-full hover:bg-slate-100 transition-colors flex items-center justify-center">&times;</button>
+
+      <!-- Icon & Title -->
+      <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mx-auto mb-3 text-xl">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+      </div>
+      <h3 class="text-2xl font-bold text-purple-800 mb-2 font-heading">¡Haz florecer nuestra comunidad con tu aporte! 💜</h3>
+      <p class="text-gray-600 text-sm mb-4">Tus contribuciones nos ayudan a mantener los espacios educativos y talleres abiertos para todas.</p>
+
+      <!-- Nequi Box -->
+      <div class="bg-purple-50 p-4 rounded-xl mb-4 border border-purple-200 shadow-inner">
+        <p class="text-xs text-purple-700 font-semibold uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
+          <i class="fa-solid fa-mobile-screen-button"></i> Método de Pago: <strong>Nequi</strong>
+        </p>
+        <p id="nequiNumber" class="text-2xl sm:text-3xl font-extrabold text-purple-900 tracking-wide my-1">3176837319</p>
+        <button id="btn-copy-nequi" onclick="copyNequiNumber()" class="mt-2 text-xs bg-purple-200 hover:bg-purple-300 text-purple-800 font-semibold py-1.5 px-4 rounded-full transition-all flex items-center justify-center gap-1.5 mx-auto active:scale-95 shadow-sm">
+          <span id="copy-btn-text">📋 Copiar número</span>
+        </button>
+      </div>
+
+      <!-- Copy Success Feedback Notice -->
+      <div id="copyNotice" class="hidden text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg p-2.5 mb-4 font-semibold animate-bounce">
+        ¡Número Nequi 3176837319 copiado al portapapeles!
+      </div>
+
+      <!-- Minimum Amount Badge -->
+      <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800 font-medium mb-5">
+        ✨ Donación mínima sugerida: <strong>$2.000 COP</strong>
+      </div>
+
+      <p class="text-xs text-gray-500">¡Gracias por hacer posible que sigamos creciendo juntas! 🌱</p>
+    </div>
+  </div>
 
   <!-- Interactive Modal for Full Article / Video View -->
   <div id="article-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300">
