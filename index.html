@@ -42,22 +42,22 @@
 
   <!-- Header & Navigation -->
   <header class="sticky top-0 z-40 glass-nav transition-all duration-300 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2">
       <!-- Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/30 transform group-hover:rotate-12 transition-transform duration-300">
-          <i class="fa-solid fa-hand-holding-heart text-2xl"></i>
+      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/30 transform group-hover:rotate-12 transition-transform duration-300">
+          <i class="fa-solid fa-hand-holding-heart text-xl sm:text-2xl"></i>
         </div>
         <div>
-          <span class="font-heading font-bold text-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-rose-500 bg-clip-text text-transparent block leading-none">Cyber Bionikas </span>
-          <span class="text-xs font-medium text-pink-500 tracking-wider uppercase block mt-0.5">Espacio Colectivo & Vivo</span>
+          <span class="font-heading font-bold text-lg sm:text-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-rose-500 bg-clip-text text-transparent block leading-none">Cyber Bionikas</span>
+          <span class="text-[10px] sm:text-xs font-medium text-pink-500 tracking-wider uppercase block mt-0.5">Espacio Colectivo & Vivo</span>
         </div>
       </a>
 
       <!-- Desktop Navigation Menu -->
       <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700">
         <a href="#carrusel" class="hover:text-pink-600 transition-colors flex items-center gap-2">
-          <i class="fa-solid fa-[#ferris-wheel] fa-circle-nodes text-pink-400"></i> Carrusel 3D
+          <i class="fa-solid fa-circle-nodes text-pink-400"></i> Carrusel 3D
         </a>
         <a href="#articulos" class="hover:text-pink-600 transition-colors flex items-center gap-2">
           <i class="fa-solid fa-book-open text-purple-400"></i> Lecturas
@@ -70,17 +70,74 @@
         </button>
       </nav>
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <button onclick="openDonationModal()" class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold px-4 py-2.5 rounded-full shadow-lg shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm">
-          <i class="fa-solid fa-hand-holding-heart text-amber-300"></i> <span>Apoya a la Escuela</span>
-        </button>
-        <button id="btn-nueva-reflexion" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-sm shadow-md shadow-pink-500/25 hover:shadow-lg hover:shadow-pink-500/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
-          <i class="fa-solid fa-plus text-xs"></i> <span>Unirse</span>
+      <!-- Action Buttons & Mobile Hamburger Button -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden sm:flex items-center gap-3">
+          <button onclick="openDonationModal()" class="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold px-4 py-2.5 rounded-full shadow-lg shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm">
+            <i class="fa-solid fa-hand-holding-heart text-amber-300"></i> <span>Apoya a la Escuela</span>
+          </button>
+          <button id="btn-nueva-reflexion" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold text-sm shadow-md shadow-pink-500/25 hover:shadow-lg hover:shadow-pink-500/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+            <i class="fa-solid fa-plus text-xs"></i> <span>Unirse</span>
+          </button>
+        </div>
+
+        <!-- Hamburger Button -->
+        <button id="mobile-menu-btn" aria-label="Abrir menú" class="md:hidden min-w-[44px] min-h-[44px] p-2 rounded-xl text-slate-700 hover:text-pink-600 hover:bg-pink-50 transition-colors flex items-center justify-center text-2xl focus:outline-none">
+          <i class="fa-solid fa-bars" id="hamburger-icon"></i>
         </button>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Side Drawer Navigation -->
+  <div id="mobile-drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300 opacity-0 md:hidden"></div>
+
+  <aside id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col justify-between p-6 overflow-y-auto">
+    <div>
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between pb-6 border-b border-pink-100 mb-6">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white shadow-md">
+            <i class="fa-solid fa-hand-holding-heart text-lg"></i>
+          </div>
+          <div>
+            <span class="font-heading font-bold text-lg text-slate-900 block leading-none">Cyber Bionikas</span>
+            <span class="text-[10px] font-semibold text-pink-500 uppercase tracking-wider block mt-0.5">Menú de Navegación</span>
+          </div>
+        </div>
+        <button id="mobile-drawer-close" aria-label="Cerrar menú" class="min-w-[44px] min-h-[44px] rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors flex items-center justify-center text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Drawer Links -->
+      <nav class="flex flex-col gap-2 font-medium text-slate-700">
+        <a href="#carrusel" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition-colors text-base min-h-[44px]">
+          <i class="fa-solid fa-circle-nodes text-pink-500 w-6"></i> Carrusel 3D
+        </a>
+        <a href="#articulos" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition-colors text-base min-h-[44px]">
+          <i class="fa-solid fa-book-open text-purple-500 w-6"></i> Lecturas
+        </a>
+        <a href="#nosotros" class="drawer-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition-colors text-base min-h-[44px]">
+          <i class="fa-solid fa-users text-rose-500 w-6"></i> Comunidad
+        </a>
+        <button onclick="openDonationModal(); closeMobileDrawer();" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 transition-colors text-base font-semibold w-full text-left min-h-[44px] mt-2">
+          <i class="fa-solid fa-heart text-pink-500 w-6"></i> Donar con Nequi
+        </button>
+      </nav>
+    </div>
+
+    <!-- Drawer Actions & Footer -->
+    <div class="pt-6 border-t border-slate-100 space-y-3">
+      <button onclick="openDonationModal(); closeMobileDrawer();" class="w-full bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-500 text-white font-semibold py-3 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 text-sm min-h-[44px]">
+        <i class="fa-solid fa-hand-holding-heart text-amber-300"></i> Apoya a la Escuela
+      </button>
+      <button id="btn-nueva-reflexion-mobile" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold py-3 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 text-sm min-h-[44px]">
+        <i class="fa-solid fa-plus text-xs"></i> Unirse a la Red
+      </button>
+      <p class="text-center text-xs text-slate-400 pt-2">Escuela Feminista 2026</p>
+    </div>
+  </aside>
 
   <!-- Main Content -->
   <main class="flex-grow">
@@ -247,41 +304,54 @@
 
   </main>
 
-  <!-- Interactive Modal for Nequi Donations -->
-  <div id="donationModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4 transition-opacity duration-300">
-    <div id="donationCard" class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl border-2 border-purple-100 text-center relative transform transition-transform duration-300 scale-95 opacity-0">
+  <!-- Interactive Modal for Nequi Donations (Bottom Sheet on Mobile, Centered on Desktop) -->
+  <div id="donationModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 hidden p-0 sm:p-4 transition-opacity duration-300">
+    <div id="donationCard" class="bg-white rounded-t-3xl sm:rounded-2xl p-6 max-w-md w-full shadow-2xl border-t-2 sm:border-2 border-purple-100 text-center relative transform transition-all duration-300 translate-y-full sm:translate-y-0 sm:scale-95 opacity-0 max-h-[90vh] overflow-y-auto">
       <!-- Close Button -->
-      <button onclick="closeDonationModal()" aria-label="Cerrar modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold w-8 h-8 rounded-full hover:bg-slate-100 transition-colors flex items-center justify-center">&times;</button>
+      <button onclick="closeDonationModal()" aria-label="Cerrar modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold min-w-[44px] min-h-[44px] rounded-full hover:bg-slate-100 transition-colors flex items-center justify-center">&times;</button>
+
+      <!-- Bottom Sheet Drag Indicator (Mobile) -->
+      <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-4 sm:hidden"></div>
 
       <!-- Icon & Title -->
-      <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mx-auto mb-3 text-xl">
+      <div class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mx-auto mb-3 text-xl shadow-sm">
         <i class="fa-solid fa-hand-holding-heart"></i>
       </div>
-      <h3 class="text-2xl font-bold text-purple-800 mb-2 font-heading">¡Haz florecer nuestra comunidad con tu aporte! 💜</h3>
-      <p class="text-gray-600 text-sm mb-4">Tus contribuciones nos ayudan a mantener los espacios educativos y talleres abiertos para todas.</p>
+      <h3 class="text-xl sm:text-2xl font-bold text-purple-800 mb-2 font-heading leading-snug">¡Haz florecer nuestra comunidad con tu aporte! 💜</h3>
+      <p class="text-slate-600 text-xs sm:text-sm mb-4 leading-relaxed">Tus contribuciones nos ayudan a mantener los espacios educativos y talleres abiertos para todas.</p>
 
       <!-- Nequi Box -->
-      <div class="bg-purple-50 p-4 rounded-xl mb-4 border border-purple-200 shadow-inner">
-        <p class="text-xs text-purple-700 font-semibold uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
-          <i class="fa-solid fa-mobile-screen-button"></i> Método de Pago: <strong>Nequi</strong>
+      <div class="bg-purple-50 p-4 rounded-2xl mb-4 border border-purple-200 shadow-inner">
+        <p class="text-xs text-purple-700 font-semibold uppercase tracking-wider mb-1 flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-mobile-screen-button text-purple-600"></i> Método de Pago: <strong>Nequi</strong>
         </p>
-        <p id="nequiNumber" class="text-2xl sm:text-3xl font-extrabold text-purple-900 tracking-wide my-1">3176837319</p>
-        <button id="btn-copy-nequi" onclick="copyNequiNumber()" class="mt-2 text-xs bg-purple-200 hover:bg-purple-300 text-purple-800 font-semibold py-1.5 px-4 rounded-full transition-all flex items-center justify-center gap-1.5 mx-auto active:scale-95 shadow-sm">
-          <span id="copy-btn-text">📋 Copiar número</span>
+        <p id="nequiNumber" class="text-2xl sm:text-3xl font-extrabold text-purple-900 tracking-wider my-1 font-mono">3176837319</p>
+        <button id="btn-copy-nequi" onclick="copyNequiNumber()" class="mt-2.5 text-xs bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-6 rounded-full transition-all flex items-center justify-center gap-2 mx-auto active:scale-95 shadow-md min-h-[44px]">
+          <i class="fa-solid fa-copy"></i> <span id="copy-btn-text">Copiar número</span>
         </button>
       </div>
 
-      <!-- Copy Success Feedback Notice -->
-      <div id="copyNotice" class="hidden text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg p-2.5 mb-4 font-semibold animate-bounce">
-        ¡Número Nequi 3176837319 copiado al portapapeles!
+      <!-- Copy Success Inline Notice -->
+      <div id="copyNotice" class="hidden text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl p-3 mb-4 font-semibold shadow-sm animate-pulse">
+        <i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> ¡Número Nequi <strong>3176837319</strong> copiado al portapapeles!
       </div>
 
       <!-- Minimum Amount Badge -->
-      <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-800 font-medium mb-5">
-        ✨ Donación mínima sugerida: <strong>$2.000 COP</strong>
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 font-medium mb-4 flex items-center justify-center gap-1.5">
+        <i class="fa-solid fa-sparkles text-amber-500"></i> Donación mínima sugerida: <strong>$2.000 COP</strong>
       </div>
 
-      <p class="text-xs text-gray-500">¡Gracias por hacer posible que sigamos creciendo juntas! 🌱</p>
+      <p class="text-[11px] sm:text-xs text-slate-400">¡Gracias por hacer posible que sigamos creciendo juntas! 🌱</p>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notification for Mobile & Desktop -->
+  <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden transition-all duration-300 transform translate-y-8 opacity-0 pointer-events-none">
+    <div class="bg-slate-900/95 text-white px-5 py-3 rounded-2xl shadow-2xl border border-purple-500/30 backdrop-blur-md flex items-center gap-3 text-sm font-semibold max-w-[90vw]">
+      <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+        <i class="fa-solid fa-check text-base"></i>
+      </div>
+      <span id="toast-message">¡Número Nequi copiado exitosamente!</span>
     </div>
   </div>
 
@@ -369,21 +439,56 @@
   <!-- Footer -->
   <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-pink-500 text-white flex items-center justify-center text-xl font-bold">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-          </div>
-          <div>
-            <span class="font-heading font-bold text-lg text-white block">Escuela Feminista</span>
-            <span class="text-xs text-slate-500">Transformando realidades a través de la educación libre</span>
+      <!-- Main Footer Vertical Stack on Mobile, Flex Row on Desktop -->
+      <div class="flex flex-col items-center text-center md:flex-row md:justify-between md:text-left gap-8">
+
+        <!-- Brand / Initiative Title -->
+        <div class="flex flex-col items-center md:items-start gap-2">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 text-white flex items-center justify-center text-xl font-bold shadow-md shadow-pink-500/20">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <div>
+              <span class="font-heading font-bold text-xl text-white block leading-none">Escuela Feminista</span>
+              <span class="text-xs text-pink-400 font-medium tracking-wide block mt-1">Transformando realidades a través del saber colectivo</span>
+            </div>
           </div>
         </div>
 
-        <div class="text-xs text-slate-500 text-center md:text-right">
-          <p>© 2026 Escuela Feminista, Cyber Bionikas, Lynn, Luz. Todos los derechos reservados.</p>
-          <p class="mt-1">Diseñado con vibra positiva, sororidad y empoderamiento.</p>
+        <!-- Sponsors Section -->
+        <div class="flex flex-col items-center md:items-start gap-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Con el valioso apoyo de:</span>
+          <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-slate-300">
+            <!-- Cyber Bionikas -->
+            <div class="flex items-center gap-2 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/50">
+              <i class="fa-solid fa-microchip text-pink-400"></i>
+              <span class="font-bold text-pink-200">Cyber Bionikas</span>
+            </div>
+
+            <!-- LUZ + Mottos -->
+            <div class="flex items-center gap-2 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/50">
+              <i class="fa-solid fa-sun text-amber-400"></i>
+              <div class="text-left">
+                <span class="font-bold text-amber-200 block leading-none">LUZ</span>
+                <span class="text-[10px] text-amber-300/80 block italic">Resiliencia y Florecimiento</span>
+              </div>
+            </div>
+
+            <!-- Lynn Products -->
+            <div class="flex items-center gap-2 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/50">
+              <i class="fa-solid fa-gem text-purple-400"></i>
+              <span class="font-bold text-purple-200">Lynn Products</span>
+            </div>
+          </div>
         </div>
+
+        <!-- Copyright Info -->
+        <div class="text-xs text-slate-500 flex flex-col items-center md:items-end gap-1">
+          <p class="font-medium text-slate-400">© 2026 LUZ y Lynn Products</p>
+          <p class="text-[11px] text-slate-500">Todos los derechos reservados.</p>
+          <p class="text-[11px] text-pink-400/80 mt-1">Diseñado con sororidad, resiliencia y empoderamiento. ✨</p>
+        </div>
+
       </div>
     </div>
   </footer>

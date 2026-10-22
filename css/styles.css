@@ -45,17 +45,18 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 320px;
+  width: 300px;
   max-width: 85vw;
-  height: 400px;
-  margin-top: -200px;
-  margin-left: -160px;
+  height: 390px;
+  margin-top: -195px;
+  margin-left: -150px;
   transform-style: preserve-3d;
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, box-shadow 0.4s ease;
   user-select: none;
   border-radius: 1.5rem;
   overflow: hidden;
   cursor: pointer;
+  touch-action: pan-y;
 }
 
 @media (min-width: 640px) {

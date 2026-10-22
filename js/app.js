@@ -138,39 +138,39 @@ function initCarousel() {
   wheel.innerHTML = AppState.posts.map((post, index) => `
     <div class="carousel-card glass-panel shadow-2xl flex flex-col border border-white/60 group" data-index="${index}">
       <!-- Header Badge & Image -->
-      <div class="relative h-44 sm:h-52 overflow-hidden bg-slate-900">
+      <div class="relative h-40 sm:h-52 overflow-hidden bg-slate-900 shrink-0">
         <img src="${post.url_imagen}" alt="${post.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onError="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80'" />
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
         <span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-pink-500 text-white text-xs font-bold shadow-md tracking-wide">
           <i class="fa-solid fa-sparkles mr-1"></i> ${post.categoria}
         </span>
-        <button onclick="event.stopPropagation(); openArticleModal(${post.id})" class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white/90 text-pink-600 hover:bg-pink-500 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110">
-          <i class="fa-solid fa-play text-sm ml-0.5"></i>
+        <button onclick="event.stopPropagation(); openArticleModal(${post.id})" aria-label="Ver Video" class="absolute bottom-2.5 right-2.5 min-w-[44px] min-h-[44px] rounded-full bg-white/90 text-pink-600 hover:bg-pink-500 hover:text-white flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95">
+          <i class="fa-solid fa-play text-base ml-0.5"></i>
         </button>
       </div>
 
       <!-- Card Content -->
-      <div class="p-5 flex flex-col justify-between flex-grow bg-white/80">
+      <div class="p-4 sm:p-5 flex flex-col justify-between flex-grow bg-white/80">
         <div>
-          <div class="flex items-center gap-2 text-xs text-slate-400 font-medium mb-1.5">
+          <div class="flex items-center gap-2 text-[11px] sm:text-xs text-slate-400 font-medium mb-1">
             <span><i class="fa-regular fa-calendar text-pink-500 mr-1"></i>${formatDate(post.fecha_creacion)}</span>
             <span>•</span>
             <span><i class="fa-regular fa-clock text-purple-500 mr-1"></i>${post.tiempo_lectura}</span>
           </div>
-          <h3 class="font-heading font-bold text-lg sm:text-xl text-slate-800 line-clamp-2 leading-snug group-hover:text-pink-600 transition-colors">
+          <h3 class="font-heading font-bold text-base sm:text-xl text-slate-800 line-clamp-2 leading-snug group-hover:text-pink-600 transition-colors">
             ${post.titulo}
           </h3>
-          <p class="text-xs sm:text-sm text-slate-600 line-clamp-2 sm:line-clamp-3 mt-2 leading-relaxed">
+          <p class="text-xs sm:text-sm text-slate-600 line-clamp-2 sm:line-clamp-3 mt-1.5 leading-relaxed">
             ${post.descripcion_corta}
           </p>
         </div>
 
-        <div class="pt-3 border-t border-pink-100 flex items-center justify-between">
-          <span class="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
-            <i class="fa-regular fa-circle-user text-pink-500"></i> ${post.autor}
+        <div class="pt-2.5 border-t border-pink-100 flex items-center justify-between gap-2 mt-2">
+          <span class="text-[11px] sm:text-xs font-semibold text-slate-500 flex items-center gap-1 truncate">
+            <i class="fa-regular fa-circle-user text-pink-500 shrink-0"></i> <span class="truncate">${post.autor}</span>
           </span>
-          <button onclick="openArticleModal(${post.id})" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold hover:opacity-90 transition-opacity shadow-sm">
-            Ver Módulo <i class="fa-solid fa-arrow-right ml-1"></i>
+          <button onclick="openArticleModal(${post.id})" class="min-h-[44px] px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold hover:opacity-90 transition-opacity shadow-sm shrink-0 flex items-center justify-center gap-1 active:scale-95">
+            <span>Ver Módulo</span> <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -180,7 +180,9 @@ function initCarousel() {
   // Build Dot Indicators
   if (dotsContainer) {
     dotsContainer.innerHTML = AppState.posts.map((_, idx) => `
-      <button class="dot-btn w-3 h-3 rounded-full transition-all duration-300 ${idx === 0 ? 'bg-pink-500 w-8' : 'bg-pink-200 hover:bg-pink-300'}" data-index="${idx}" aria-label="Ir a diapositiva ${idx + 1}"></button>
+      <button class="dot-btn min-w-[24px] min-h-[24px] p-1.5 flex items-center justify-center focus:outline-none" data-index="${idx}" aria-label="Ir a diapositiva ${idx + 1}">
+        <span class="dot-pill block rounded-full transition-all duration-300 ${idx === 0 ? 'bg-pink-500 w-7 h-2.5' : 'bg-pink-200 hover:bg-pink-300 w-2.5 h-2.5'}"></span>
+      </button>
     `).join('');
 
     dotsContainer.querySelectorAll('.dot-btn').forEach(btn => {
@@ -289,10 +291,13 @@ function updateCarouselPositions() {
 
   // Update Dots Active State
   dots.forEach((dot, index) => {
-    if (index === AppState.currentIndex) {
-      dot.className = 'dot-btn w-8 h-3 rounded-full bg-pink-500 transition-all duration-300 shadow-sm';
-    } else {
-      dot.className = 'dot-btn w-3 h-3 rounded-full bg-pink-200 hover:bg-pink-300 transition-all duration-300';
+    const pill = dot.querySelector('.dot-pill');
+    if (pill) {
+      if (index === AppState.currentIndex) {
+        pill.className = 'dot-pill block w-7 h-2.5 rounded-full bg-pink-500 transition-all duration-300 shadow-sm';
+      } else {
+        pill.className = 'dot-pill block w-2.5 h-2.5 rounded-full bg-pink-200 hover:bg-pink-300 transition-all duration-300';
+      }
     }
   });
 }
@@ -468,6 +473,27 @@ function closeArticleModal() {
    💸 NEQUI DONATION MODAL CONTROLS
    ========================================================================== */
 
+function showToast(message) {
+  const toast = document.getElementById('toast-notification');
+  const toastMsg = document.getElementById('toast-message');
+  if (!toast) return;
+
+  if (toastMsg) toastMsg.textContent = message;
+
+  toast.classList.remove('hidden');
+  void toast.offsetWidth; // force reflow
+  toast.classList.remove('translate-y-8', 'opacity-0');
+  toast.classList.add('translate-y-0', 'opacity-100');
+
+  setTimeout(() => {
+    toast.classList.remove('translate-y-0', 'opacity-100');
+    toast.classList.add('translate-y-8', 'opacity-0');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 300);
+  }, 3000);
+}
+
 function openDonationModal() {
   const modal = document.getElementById('donationModal');
   const card = document.getElementById('donationCard');
@@ -479,8 +505,8 @@ function openDonationModal() {
     modal.classList.remove('hidden');
     setTimeout(() => {
       if (card) {
-        card.classList.remove('scale-95', 'opacity-0');
-        card.classList.add('scale-100', 'opacity-100');
+        card.classList.remove('scale-95', 'opacity-0', 'translate-y-full');
+        card.classList.add('scale-100', 'opacity-100', 'translate-y-0');
       }
     }, 10);
   }
@@ -491,13 +517,13 @@ function closeDonationModal() {
   const card = document.getElementById('donationCard');
 
   if (card) {
-    card.classList.remove('scale-100', 'opacity-100');
-    card.classList.add('scale-95', 'opacity-0');
+    card.classList.remove('scale-100', 'opacity-100', 'translate-y-0');
+    card.classList.add('scale-95', 'opacity-0', 'translate-y-full');
   }
 
   setTimeout(() => {
     if (modal) modal.classList.add('hidden');
-  }, 200);
+  }, 250);
 }
 
 async function copyNequiNumber() {
@@ -522,6 +548,9 @@ async function copyNequiNumber() {
       document.body.removeChild(textArea);
     }
 
+    // Floating toast notification feedback
+    showToast(`¡Número Nequi ${numberText} copiado al portapapeles!`);
+
     // Visual feedback confirmation notice inside modal
     if (copyNotice) {
       copyNotice.classList.remove('hidden');
@@ -530,7 +559,7 @@ async function copyNequiNumber() {
     // Dynamic button feedback
     if (btnText) {
       const originalText = btnText.innerHTML;
-      btnText.innerHTML = '✅ ¡Copiado!';
+      btnText.innerHTML = '¡Copiado!';
       setTimeout(() => {
         btnText.innerHTML = originalText;
       }, 2500);
@@ -541,10 +570,49 @@ async function copyNequiNumber() {
   }
 }
 
-// Attach donation functions to global window object
+/* ==========================================================================
+   📱 MOBILE NAVIGATION DRAWER CONTROLS
+   ========================================================================== */
+
+function openMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const backdrop = document.getElementById('mobile-drawer-backdrop');
+  if (!drawer || !backdrop) return;
+
+  backdrop.classList.remove('hidden');
+  // Trigger reflow for CSS transitions
+  void backdrop.offsetWidth;
+  backdrop.classList.remove('opacity-0');
+  backdrop.classList.add('opacity-100');
+
+  drawer.classList.remove('translate-x-full');
+  drawer.classList.add('translate-x-0');
+  document.body.classList.add('overflow-hidden');
+}
+
+function closeMobileDrawer() {
+  const drawer = document.getElementById('mobile-drawer');
+  const backdrop = document.getElementById('mobile-drawer-backdrop');
+  if (!drawer || !backdrop) return;
+
+  drawer.classList.remove('translate-x-0');
+  drawer.classList.add('translate-x-full');
+
+  backdrop.classList.remove('opacity-100');
+  backdrop.classList.add('opacity-0');
+
+  setTimeout(() => {
+    backdrop.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }, 300);
+}
+
+// Attach functions to global window object
 window.openDonationModal = openDonationModal;
 window.closeDonationModal = closeDonationModal;
 window.copyNequiNumber = copyNequiNumber;
+window.openMobileDrawer = openMobileDrawer;
+window.closeMobileDrawer = closeMobileDrawer;
 
 /**
  * Filter and Search handler
@@ -635,13 +703,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Join community notification demo button
+  // Mobile drawer button & backdrop handlers
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileDrawerClose = document.getElementById('mobile-drawer-close');
+  const mobileBackdrop = document.getElementById('mobile-drawer-backdrop');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
+
+  if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileDrawer);
+  if (mobileDrawerClose) mobileDrawerClose.addEventListener('click', closeMobileDrawer);
+  if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileDrawer);
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', closeMobileDrawer);
+  });
+
+  // Join community notification demo buttons
+  const handleJoinClick = () => {
+    alert('¡Bienvenida a la Escuela Feminista! Gracias por ser parte de nuestra red de saberes y apoyo comunitario.');
+    closeMobileDrawer();
+  };
+
   const joinBtn = document.getElementById('btn-nueva-reflexion');
-  if (joinBtn) {
-    joinBtn.addEventListener('click', () => {
-      alert('¡Bienvenida a la Escuela Feminista! Gracias por ser parte de nuestra red de saberes y apoyo comunitario.');
-    });
-  }
+  const joinBtnMobile = document.getElementById('btn-nueva-reflexion-mobile');
+  if (joinBtn) joinBtn.addEventListener('click', handleJoinClick);
+  if (joinBtnMobile) joinBtnMobile.addEventListener('click', handleJoinClick);
 
   console.log("App initialisation complete.");
 });
