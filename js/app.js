@@ -464,6 +464,88 @@ function closeArticleModal() {
   }, 200);
 }
 
+/* ==========================================================================
+   💸 NEQUI DONATION MODAL CONTROLS
+   ========================================================================== */
+
+function openDonationModal() {
+  const modal = document.getElementById('donationModal');
+  const card = document.getElementById('donationCard');
+  const copyNotice = document.getElementById('copyNotice');
+
+  if (copyNotice) copyNotice.classList.add('hidden');
+
+  if (modal) {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+      if (card) {
+        card.classList.remove('scale-95', 'opacity-0');
+        card.classList.add('scale-100', 'opacity-100');
+      }
+    }, 10);
+  }
+}
+
+function closeDonationModal() {
+  const modal = document.getElementById('donationModal');
+  const card = document.getElementById('donationCard');
+
+  if (card) {
+    card.classList.remove('scale-100', 'opacity-100');
+    card.classList.add('scale-95', 'opacity-0');
+  }
+
+  setTimeout(() => {
+    if (modal) modal.classList.add('hidden');
+  }, 200);
+}
+
+async function copyNequiNumber() {
+  const nequiEl = document.getElementById('nequiNumber');
+  const numberText = nequiEl ? nequiEl.innerText.trim() : '3176837319';
+  const copyNotice = document.getElementById('copyNotice');
+  const btnText = document.getElementById('copy-btn-text');
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(numberText);
+    } else {
+      // Fallback for non-HTTPS or legacy browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = numberText;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
+
+    // Visual feedback confirmation notice inside modal
+    if (copyNotice) {
+      copyNotice.classList.remove('hidden');
+    }
+
+    // Dynamic button feedback
+    if (btnText) {
+      const originalText = btnText.innerHTML;
+      btnText.innerHTML = '✅ ¡Copiado!';
+      setTimeout(() => {
+        btnText.innerHTML = originalText;
+      }, 2500);
+    }
+  } catch (err) {
+    console.error('Error al copiar:', err);
+    alert(`Número Nequi: ${numberText}`);
+  }
+}
+
+// Attach donation functions to global window object
+window.openDonationModal = openDonationModal;
+window.closeDonationModal = closeDonationModal;
+window.copyNequiNumber = copyNequiNumber;
+
 /**
  * Filter and Search handler
  */
@@ -520,6 +602,25 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.target === modalBackdrop) closeArticleModal();
     });
   }
+
+  // Setup Donation Modal Backdrop Handler & Escape Key Close
+  const donationModalBackdrop = document.getElementById('donationModal');
+  if (donationModalBackdrop) {
+    donationModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === donationModalBackdrop) closeDonationModal();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('donationModal')?.classList.contains('hidden') === false) {
+        closeDonationModal();
+      }
+      if (document.getElementById('article-modal')?.classList.contains('hidden') === false) {
+        closeArticleModal();
+      }
+    }
+  });
 
   // Like button interaction in modal
   const likeBtn = document.getElementById('btn-like');
