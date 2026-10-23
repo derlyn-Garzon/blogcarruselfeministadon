@@ -23,7 +23,7 @@ const FALLBACK_POSTS = [
     "url_video": "https://escuelafeminista.org/videos/colectividad-redes-apoyo",
     "url_imagen": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
     "descripcion_corta": "Estrategias de organización comunitaria y la importancia de tejer alianzas y espacios seguros.",
-    "categoria": "Comunidad",
+    "categoria": "Literatura y Poesía Feminista",
     "tiempo_lectura": "7 min",
     "autor": "Ingeniera Luz Derlyn Garzón"
   },
