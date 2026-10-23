@@ -18,8 +18,8 @@ const FALLBACK_POSTS = [
   },
   {
     "id": 2,
-    "titulo": "Colectividad y Redes de Apoyo",
-    "fecha_creacion": "2026-03-15",
+    "titulo": "Resistencia: El legado de Alfonsina Storni",",
+    "fecha_creacion": "2026-23-10",
     "url_video": "https://escuelafeminista.org/videos/colectividad-redes-apoyo",
     "url_imagen": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
     "descripcion_corta": "Estrategias de organización comunitaria y la importancia de tejer alianzas y espacios seguros.",
